@@ -8,21 +8,11 @@ const servicePrice1 = +prompt("Сколько это будет стоить?");
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
 const servicePrice2 = +prompt("Сколько это будет стоить?");
 
-console.log(adaptive);
 const rollback = 2000;
 
 const fullPrice = screenPrice + servicePrice1 + servicePrice2;
 const servicePercentPrice = Math.round(fullPrice - rollback);
 console.log(servicePercentPrice);
-// if (fullPrice >= 30000) {
-//   console.log("Даем скидку в 10%");
-// } else if (fullPrice >= 15000) {
-//   console.log("Даем скидку в 5%");
-// } else if ((fullPrice < 15000) && (0 <= fullPrice)) {
-//   console.log("Скидка не предусмотрена");
-// } else {
-//   console.log("Что то пошло не так");
-// }
 switch(fullPrice){
     case fullPrice >= 30000:
         console.log("Даем скидку в 10%");
