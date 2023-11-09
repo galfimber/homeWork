@@ -20,7 +20,7 @@ switch(true){
     case fullPrice >= 15000:
         console.log("Даем скидку в 5%");
         break
-    case fullPrice < 15000 && 0 <= fullPrice:
+    case fullPrice < 15000 && 0 < fullPrice:
         console.log("Скидка не предусмотрена");
         break
     default:
