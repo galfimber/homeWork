@@ -10,7 +10,7 @@ const servicePrice1 = +prompt("Сколько это будет стоить?");
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
 const servicePrice2 = +prompt("Сколько это будет стоить?");
 
-const rollback = 2000;
+const rollback = 20;
 
 const getRollbackMessage = function (price) {
   switch (true) {
@@ -25,15 +25,15 @@ const getRollbackMessage = function (price) {
   }
 };
 
-const getAllServicePrices = function (service1, service2) {
-  return service1 + service2;
+const getAllServicePrices = function (servicePrice1, servicePrice2) {
+  return servicePrice1 + servicePrice2;
 };
 
 const showTypeOf = function (variable) {
   return typeof variable;
 };
 
-const getFullPrice = function (screenPrice, allServicePrices) {
+function getFullPrice (screenPrice, allServicePrices) {
   return screenPrice + allServicePrices;
 };
 
@@ -43,12 +43,12 @@ const getTitle = function (title) {
 };
 
 const getServicePercentPrices = function(fullPrice, rollback){
-    return fullPrice - rollback;
+    return fullPrice - (fullPrice / 100 * rollback);
 }
 
+const allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+const fullPrice = getFullPrice(screenPrice, allServicePrices);
 const servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
-const allServicePrices = getAllServicePrices(service1, service2);
-const fullPrice = screenPrice + allServicePrices;
 title = getTitle(title);
 
 console.log(showTypeOf(title));
