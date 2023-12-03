@@ -13,6 +13,8 @@ const totalCountOther = document.getElementsByClassName("total-input")[2];
 const fullTotalCount = document.getElementsByClassName("total-input")[3];
 const totalcountRollback = document.getElementsByClassName("total-input")[4];
 
+let screen = document.querySelectorAll(".screen");
+
 const appData = {
   rollback: 20,
   title: "",
