@@ -35,7 +35,7 @@ const appData = {
     startBtn.addEventListener("click", this.isReady);
     resetBtn.addEventListener("click", this.reset);
     plusBtn.addEventListener("click", this.addScreenBlock);
-    inputRange.addEventListener("input", this.addRollbackValue.bind(this));
+    inputRange.addEventListener("input", this.addRollbackValue.bind(appData));
   },
   isReady: function () {
     screens = document.querySelectorAll(".screen");
@@ -83,18 +83,18 @@ const appData = {
     appData.showResult();
   },
   clear: function () {
-    appData.rollback = 0;
-    appData.title = "";
-    appData.screenPrice = 0;
-    appData.screensCount = 0;
-    appData.screens = [];
-    appData.adaptive = true;
-    appData.servicesPercent = {};
-    appData.servicesNumber = {};
-    appData.servicePercentPrice = 0;
-    appData.fullPrice = 0;
-    appData.servicePricesPercent = 0;
-    appData.servicePricesNumber = 0;
+    this.rollback = 0;
+    this.title = "";
+    this.screenPrice = 0;
+    this.screensCount = 0;
+    this.screens = [];
+    this.adaptive = true;
+    this.servicesPercent = {};
+    this.servicesNumber = {};
+    this.servicePercentPrice = 0;
+    this.fullPrice = 0;
+    this.servicePricesPercent = 0;
+    this.servicePricesNumber = 0;
   },
   addTitle: function () {
     document.title = title.textContent;
@@ -155,9 +155,9 @@ const appData = {
   },
   addRollbackValue: function () {
     inputRangeValue.textContent = inputRange.value;
-    appData.rollback = +inputRange.value;
-    appData.servicePercentPrice =
-      appData.fullPrice - (this.fullPrice / 100) * this.rollback;
+    this.rollback = +inputRange.value;
+    this.servicePercentPrice =
+      this.fullPrice - (this.fullPrice / 100) * this.rollback;
     totalcountRollback.value = this.servicePercentPrice;
   },
   start: function () {
@@ -167,7 +167,7 @@ const appData = {
     // appData.logger();
     console.log(this);
     this.showResult();
-    appData.clear.bind(this);
+    this.clear.bind(appData);
   },
   logger: function () {
     for (let key in this) {
@@ -181,22 +181,22 @@ const appData = {
     return string != null && isNaN(string);
   },
   addPrices: function () {
-    appData.screenPrice = this.screens.reduce((sum, current) => {
+    this.screenPrice = this.screens.reduce((sum, current) => {
       return sum + current.price;
     }, 0);
     for (let key in this.servicesNumber) {
-      appData.servicePricesNumber += this.servicesNumber[key];
+      this.servicePricesNumber += this.servicesNumber[key];
     }
 
     for (let key in this.servicesPercent) {
-      appData.servicePricesPercent +=
+      this.servicePricesPercent +=
         (this.screenPrice / 100) * this.servicesPercent[key];
     }
 
-    appData.fullPrice =
+    this.fullPrice =
       +this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
 
-    appData.servicePercentPrice =
+    this.servicePercentPrice =
       this.fullPrice - (this.fullPrice / 100) * this.rollback;
   },
 };
