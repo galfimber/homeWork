@@ -32,10 +32,10 @@ const appData = {
   servicePricesNumber: 0,
   init: function () {
     this.addTitle();
-    startBtn.addEventListener("click", this.isReady);
-    resetBtn.addEventListener("click", this.reset);
+    startBtn.addEventListener("click", this.isReady.bind(this));
+    resetBtn.addEventListener("click", this.reset.bind(this));
     plusBtn.addEventListener("click", this.addScreenBlock);
-    inputRange.addEventListener("input", this.addRollbackValue.bind(appData));
+    inputRange.addEventListener("input", this.addRollbackValue.bind(this));
   },
   isReady: function () {
     screens = document.querySelectorAll(".screen");
@@ -55,7 +55,7 @@ const appData = {
         item.querySelector(".main-controls__select > select").disabled = true;
         item.querySelector(".main-controls__input > input").disabled = true;
       });
-      appData.start();
+      this.start();
     }
   },
   reset: function () {
@@ -75,15 +75,18 @@ const appData = {
       item.querySelector("input").checked = false;
     });
     inputRange.value = 0;
+    inputRangeValue.textContent = inputRange.value;
     for (let i = 1; i < screens.length; i++) {
       screens[i].remove();
     }
-    appData.clear();
+    this.clear();
+    this.rollback = 0;
+    this.fullPrice = 0;
 
-    appData.showResult();
+    this.showResult();
   },
   clear: function () {
-    this.rollback = 0;
+    //this.rollback = 0;
     this.title = "";
     this.screenPrice = 0;
     this.screensCount = 0;
@@ -92,7 +95,7 @@ const appData = {
     this.servicesPercent = {};
     this.servicesNumber = {};
     this.servicePercentPrice = 0;
-    this.fullPrice = 0;
+    //this.fullPrice = 0;
     this.servicePricesPercent = 0;
     this.servicePricesNumber = 0;
   },
@@ -167,7 +170,7 @@ const appData = {
     // appData.logger();
     console.log(this);
     this.showResult();
-    this.clear.bind(appData);
+    this.clear();
   },
   logger: function () {
     for (let key in this) {
